@@ -13,3 +13,10 @@ SessionLocal=sessionmaker(bind=engine ,autocommit=False,autoflush=False)
 #autoFlush==True means changes are flushed automatically.
 #autoFlush==False means changes are not flushed automatically until we call .flush()
 Base=declarative_base()
+
+def get_db():
+    db=SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
